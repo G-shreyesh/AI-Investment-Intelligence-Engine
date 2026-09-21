@@ -2,6 +2,13 @@
 
 An evidence-first AI investment research platform that combines **live web evidence, quantitative financial data, scenario analysis, portfolio analytics, and AI reasoning** to help users investigate market claims and understand how real-world events may affect companies and portfolios.
 
+## 🌐 Live Demo
+
+**Try the deployed application:**  
+https://ai-investment-intelligence-engine-6wxg3kwf8h5rfnfuwprr2f.streamlit.app/
+
+---
+
 Rather than simply summarizing financial news, the system follows a structured research process:
 
 **Market Information → Evidence Verification → Company Exposure → Financial Materiality → Scenario Analysis → Portfolio Impact**
