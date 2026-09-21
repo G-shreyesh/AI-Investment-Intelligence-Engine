@@ -374,10 +374,73 @@ with st.sidebar:
 
     if mode != "💼 Portfolio Impact":
 
-        ticker = st.text_input(
-            "Stock Ticker",
-            placeholder="AAPL",
-        ).upper().strip()
+        # Searchable company / ticker picker for commonly researched U.S. stocks.
+        # Streamlit selectboxes support type-to-search, while the manual option
+        # keeps the app compatible with any ticker supported by the data layer.
+        stock_options = {
+            "Apple Inc. (AAPL)": "AAPL",
+            "Microsoft Corporation (MSFT)": "MSFT",
+            "NVIDIA Corporation (NVDA)": "NVDA",
+            "Amazon.com, Inc. (AMZN)": "AMZN",
+            "Alphabet Inc. Class A (GOOGL)": "GOOGL",
+            "Meta Platforms, Inc. (META)": "META",
+            "Tesla, Inc. (TSLA)": "TSLA",
+            "Broadcom Inc. (AVGO)": "AVGO",
+            "Berkshire Hathaway Inc. Class B (BRK-B)": "BRK-B",
+            "JPMorgan Chase & Co. (JPM)": "JPM",
+            "Visa Inc. (V)": "V",
+            "Mastercard Incorporated (MA)": "MA",
+            "Walmart Inc. (WMT)": "WMT",
+            "Eli Lilly and Company (LLY)": "LLY",
+            "Johnson & Johnson (JNJ)": "JNJ",
+            "Exxon Mobil Corporation (XOM)": "XOM",
+            "UnitedHealth Group Incorporated (UNH)": "UNH",
+            "Costco Wholesale Corporation (COST)": "COST",
+            "Netflix, Inc. (NFLX)": "NFLX",
+            "Advanced Micro Devices, Inc. (AMD)": "AMD",
+            "Salesforce, Inc. (CRM)": "CRM",
+            "Adobe Inc. (ADBE)": "ADBE",
+            "Palantir Technologies Inc. (PLTR)": "PLTR",
+            "The Coca-Cola Company (KO)": "KO",
+            "PepsiCo, Inc. (PEP)": "PEP",
+            "The Walt Disney Company (DIS)": "DIS",
+            "Bank of America Corporation (BAC)": "BAC",
+            "Goldman Sachs Group, Inc. (GS)": "GS",
+            "Morgan Stanley (MS)": "MS",
+            "The Home Depot, Inc. (HD)": "HD",
+            "McDonald's Corporation (MCD)": "MCD",
+            "Nike, Inc. (NKE)": "NKE",
+            "Starbucks Corporation (SBUX)": "SBUX",
+            "Uber Technologies, Inc. (UBER)": "UBER",
+            "Airbnb, Inc. (ABNB)": "ABNB",
+            "Coinbase Global, Inc. (COIN)": "COIN",
+        }
+
+        stock_choice = st.selectbox(
+            "Company / Stock",
+            options=[
+                "Select a company or ticker...",
+                *stock_options.keys(),
+                "Other — enter ticker manually",
+            ],
+            index=0,
+            help=(
+                "Start typing a company name or ticker to search the list. "
+                "Choose the manual option for any other supported ticker."
+            ),
+        )
+
+        if stock_choice == "Other — enter ticker manually":
+            ticker = st.text_input(
+                "Stock Ticker",
+                placeholder="e.g. IBM",
+                help="Enter a valid ticker symbol.",
+            ).upper().strip()
+        else:
+            ticker = stock_options.get(stock_choice, "")
+
+        if ticker:
+            st.caption(f"Selected ticker: **{ticker}**")
 
     else:
 
